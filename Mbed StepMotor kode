@@ -1,0 +1,99 @@
+#include "mbed.h"
+BusOut StepMotor(PA_7,PB_6,PC_7,PA_9);
+
+int verdi;
+//double grader=0.0;
+char buffer[80];
+int counter;
+int oldVal;
+int val;
+int diff;
+void right()
+{
+    if(counter == 255) {
+        StepMotor = 0x0;
+    } else {
+        for(int i=0; i<2; i++) {
+            StepMotor=0x9;//1001
+            wait_ms(10);
+            StepMotor=0xC;//1100
+            wait_ms(10);
+            StepMotor=0x6;//0110
+            wait_ms(10);
+            StepMotor=0x3;//0011
+            wait_ms(10);
+            // grader=grader+0.703125;
+        }
+        counter++;
+        printf("%d\n", (counter*360/256));
+    }
+}
+
+void left()
+{
+    if (counter == 0) {
+        StepMotor = 0x0;
+    } else {
+        for(int i=0; i<2; i++) {
+            StepMotor=0x6;//1001
+            wait_ms(10);
+            StepMotor=0xC;//1100
+            wait_ms(10);
+            StepMotor=0x9;//0110
+            wait_ms(10);
+            StepMotor=0x3;//0011
+            wait_ms(10);
+            printf("%d\n", (counter*360/256));
+            //   grader=grader-0.703125;
+        }
+        counter--;
+        printf("%d\n", (counter*360/256));
+    }
+}
+
+int main()
+{
+    //old_value=grader;
+    // printf("%d\n",grader);
+    while (true) {
+        scanf("%[^\r\n]s",buffer);  // Read a whole line
+        getchar();                  // remove "\r\n" from stio
+        getchar();
+        verdi = atoi(buffer);
+//        printf("%d\n", (int)grader);
+
+        printf("Motatt verdi: %s\n",buffer);
+        printf("Verdi som int %d",verdi);
+        printf("counter verdi: %d\n", (counter*360/256));
+        //printf("%s\n",buffer);
+
+        /*
+        Fra nunchuk - steppe
+        */
+        if((verdi <= 100))//&&(grader>(-180))) left();
+            left();
+        else if((verdi >= 200)&&(verdi<260))
+            right();
+
+        /*
+        Fra C# - gå til gradeverdi
+        */
+        else if (verdi >=10000) {
+            verdi = verdi-10000;
+            val = verdi * 256/360;
+            //printf("%d\n",val);
+            oldVal=counter;
+            diff=val-oldVal;
+            while(diff!=0) {
+                oldVal=counter;
+                diff=val-oldVal;
+                if(diff>=0)
+                    right();
+                if(diff<0)
+                    left();
+            }
+
+        } else StepMotor=0x0;
+        //printf("%d\n", (counter*360/256));
+    }
+}

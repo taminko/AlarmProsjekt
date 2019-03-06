@@ -1,0 +1,1213 @@
+[
+    {
+        "id": "8d0c6ad7.809718",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "43138fc4.4cebf",
+        "type": "change",
+        "z": "8d0c6ad7.809718",
+        "name": "Active/Inactive",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.arg1",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.SW0",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 300,
+        "wires": [
+            [
+                "ad80b454.89067",
+                "97b3ec9e.145e6",
+                "af1789f2.753208"
+            ]
+        ]
+    },
+    {
+        "id": "db393ca8.33e82",
+        "type": "change",
+        "z": "8d0c6ad7.809718",
+        "name": "Alarm ON/OFF",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.arg2",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "on",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 340,
+        "wires": [
+            [
+                "ad80b454.89067",
+                "1d364601.3a95d2",
+                "a7c5bb63.15425"
+            ]
+        ]
+    },
+    {
+        "id": "52c46ae4.494274",
+        "type": "change",
+        "z": "8d0c6ad7.809718",
+        "name": "GUI Camera controll ON/OFF",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.arg3",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 380,
+        "wires": [
+            [
+                "ad80b454.89067"
+            ]
+        ]
+    },
+    {
+        "id": "5c52b134.4b0e4",
+        "type": "serial in",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "serial": "732a9e5a.5d74b",
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "e02eb521.4cc978"
+            ]
+        ]
+    },
+    {
+        "id": "e02eb521.4cc978",
+        "type": "debug",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 390,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "68cc3bd.96bccc4",
+        "type": "udp in",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "iface": "",
+        "port": "9051",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 120,
+        "y": 60,
+        "wires": [
+            [
+                "caa5500e.093c38"
+            ]
+        ]
+    },
+    {
+        "id": "afb04b75.ccf0c8",
+        "type": "debug",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 330,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "28098178.49057e",
+        "type": "e-mail",
+        "z": "8d0c6ad7.809718",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "name": "",
+        "dname": "",
+        "x": 1030,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "69500ff1.766f48",
+        "type": "delay",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "day",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 890,
+        "y": 920,
+        "wires": [
+            [
+                "28098178.49057e"
+            ]
+        ]
+    },
+    {
+        "id": "92abacf4.0ec12",
+        "type": "rpi-gpio in",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "pin": "35",
+        "intype": "tri",
+        "debounce": "25",
+        "read": false,
+        "x": 130,
+        "y": 700,
+        "wires": [
+            [
+                "1d364601.3a95d2",
+                "db393ca8.33e82",
+                "42e5ea5c.9799e4"
+            ]
+        ]
+    },
+    {
+        "id": "caa5500e.093c38",
+        "type": "csv",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "CMD,arg1,arg2,arg3,arg4,arg5,arg6",
+        "skip": "0",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "bdf6084f.1bb8c8",
+                "afb04b75.ccf0c8"
+            ]
+        ]
+    },
+    {
+        "id": "bdf6084f.1bb8c8",
+        "type": "switch",
+        "z": "8d0c6ad7.809718",
+        "name": "CMD",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "eq",
+                "v": "Capture",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 6,
+        "x": 310,
+        "y": 140,
+        "wires": [
+            [
+                "43138fc4.4cebf"
+            ],
+            [
+                "db393ca8.33e82"
+            ],
+            [
+                "52c46ae4.494274"
+            ],
+            [
+                "91cc8a0a.73739"
+            ],
+            [
+                "455d7f6f.868f08"
+            ],
+            [
+                "72d669f7.42d7c8"
+            ]
+        ]
+    },
+    {
+        "id": "ad80b454.89067",
+        "type": "debug",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1310,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "37917ab7.36c82e",
+        "type": "udp in",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "iface": "",
+        "port": "9050",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 380,
+        "y": 3720,
+        "wires": [
+            [
+                "8342c68f.1f1f08",
+                "38d58c7.2919c74"
+            ]
+        ]
+    },
+    {
+        "id": "8342c68f.1f1f08",
+        "type": "udp out",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "addr": "128.39.113.212",
+        "iface": "",
+        "port": "9050",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 630,
+        "y": 3700,
+        "wires": []
+    },
+    {
+        "id": "226820d.41427e",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "Sender fra Nucleo til PI",
+        "info": "",
+        "x": 280,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "f330c682.f64118",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "Sender fra C#",
+        "info": "",
+        "x": 230,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "8ca7029d.f7f6",
+        "type": "serial out",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "serial": "732a9e5a.5d74b",
+        "x": 1500,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "1d364601.3a95d2",
+        "type": "switch",
+        "z": "8d0c6ad7.809718",
+        "name": "Blobs Detected",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 580,
+        "y": 920,
+        "wires": [
+            [
+                "5a22d6d6.598e08"
+            ]
+        ]
+    },
+    {
+        "id": "42e5ea5c.9799e4",
+        "type": "exec",
+        "z": "8d0c6ad7.809718",
+        "command": "./capture.sh",
+        "addpay": true,
+        "append": "-u",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Take picture",
+        "x": 1110,
+        "y": 860,
+        "wires": [
+            [
+                "b28b5e94.427218"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "97b3ec9e.145e6",
+        "type": "exec",
+        "z": "8d0c6ad7.809718",
+        "command": "./Internet.sh",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Upload picture",
+        "x": 1080,
+        "y": 660,
+        "wires": [
+            [
+                "a003c91b.eaec2"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "38d58c7.2919c74",
+        "type": "debug",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 590,
+        "y": 3740,
+        "wires": []
+    },
+    {
+        "id": "455d7f6f.868f08",
+        "type": "change",
+        "z": "8d0c6ad7.809718",
+        "name": "BlobControl",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.arg5",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 460,
+        "wires": [
+            [
+                "ad80b454.89067",
+                "296a272d.632de8"
+            ]
+        ]
+    },
+    {
+        "id": "91cc8a0a.73739",
+        "type": "change",
+        "z": "8d0c6ad7.809718",
+        "name": "Buffer mBed",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.arg4",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 420,
+        "wires": [
+            [
+                "ad80b454.89067",
+                "99290a17.a27248"
+            ]
+        ]
+    },
+    {
+        "id": "72d669f7.42d7c8",
+        "type": "change",
+        "z": "8d0c6ad7.809718",
+        "name": "TakePicture",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.arg6",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 500,
+        "wires": [
+            [
+                "42e5ea5c.9799e4",
+                "ad80b454.89067"
+            ]
+        ]
+    },
+    {
+        "id": "a003c91b.eaec2",
+        "type": "debug",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1250,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "296a272d.632de8",
+        "type": "exec",
+        "z": "8d0c6ad7.809718",
+        "command": "./blob.sh ",
+        "addpay": true,
+        "append": "-u",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "start blob",
+        "x": 1060,
+        "y": 760,
+        "wires": [
+            [
+                "2b64d279.19573e"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "5a22d6d6.598e08",
+        "type": "change",
+        "z": "8d0c6ad7.809718",
+        "name": "Blobs!?",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "Blobs Detected",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 920,
+        "wires": [
+            [
+                "69500ff1.766f48"
+            ]
+        ]
+    },
+    {
+        "id": "2b64d279.19573e",
+        "type": "debug",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1250,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "d465c812.511018",
+        "type": "debug",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1410,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "99290a17.a27248",
+        "type": "function",
+        "z": "8d0c6ad7.809718",
+        "name": "Buffer number to string",
+        "func": "msg.payload = String(msg.payload);\nmsg.payload += \"\\r\\n\"\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1270,
+        "y": 60,
+        "wires": [
+            [
+                "8ca7029d.f7f6",
+                "d465c812.511018"
+            ]
+        ]
+    },
+    {
+        "id": "7bc6214f.72f818",
+        "type": "rpi-gpio in",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "pin": "12",
+        "intype": "in",
+        "debounce": "25",
+        "read": true,
+        "x": 130,
+        "y": 760,
+        "wires": [
+            [
+                "1933075f.1fdab9"
+            ]
+        ]
+    },
+    {
+        "id": "aef32440.44a5",
+        "type": "rpi-gpio in",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "pin": "16",
+        "intype": "in",
+        "debounce": "25",
+        "read": true,
+        "x": 130,
+        "y": 820,
+        "wires": [
+            [
+                "1933075f.1fdab9"
+            ]
+        ]
+    },
+    {
+        "id": "eb9384a1.37c6c",
+        "type": "rpi-gpio in",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "pin": "18",
+        "intype": "in",
+        "debounce": "25",
+        "read": true,
+        "x": 130,
+        "y": 880,
+        "wires": [
+            [
+                "1933075f.1fdab9"
+            ]
+        ]
+    },
+    {
+        "id": "1933075f.1fdab9",
+        "type": "function",
+        "z": "8d0c6ad7.809718",
+        "name": "mk csv $SW,,,",
+        "func": "var SW0 = context.get('SW0') || 0;\nvar SW1 = context.get('SW1') || 0;\nvar SW2 = context.get('SW2') || 0;\n\nif (msg.topic==\"pi/12\")\n{  SW0=msg.payload;\n   context.set('SW0', SW0); }\n\nif (msg.topic==\"pi/16\")\n{  SW1=msg.payload; \n   context.set('SW1', SW1); }\n\nif (msg.topic==\"pi/18\")\n{  SW2=msg.payload;  \n   context.set('SW2', SW2); }\n\nmsg.payload =\"$SW,\"+SW0+\",\"+SW1+\",\"+SW2;\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 820,
+        "wires": [
+            [
+                "95b038cd.d4be88"
+            ]
+        ]
+    },
+    {
+        "id": "a11c9cf0.f8514",
+        "type": "serial in",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "serial": "732a9e5a.5d74b",
+        "x": 1210,
+        "y": 280,
+        "wires": [
+            [
+                "e65507ce.05baf8",
+                "3fbe3269.bf409e"
+            ]
+        ]
+    },
+    {
+        "id": "e65507ce.05baf8",
+        "type": "udp out",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "addr": "128.39.112.177",
+        "iface": "",
+        "port": "9051",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 1450,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "3fbe3269.bf409e",
+        "type": "debug",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1410,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "95b038cd.d4be88",
+        "type": "csv",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "$SW,SW0,SW1,SW2",
+        "skip": "0",
+        "x": 470,
+        "y": 820,
+        "wires": [
+            [
+                "a2ba4b65.2e15f8"
+            ]
+        ]
+    },
+    {
+        "id": "a2ba4b65.2e15f8",
+        "type": "switch",
+        "z": "8d0c6ad7.809718",
+        "name": "$SW",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "true"
+            },
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 590,
+        "y": 820,
+        "wires": [
+            [
+                "43138fc4.4cebf"
+            ],
+            [
+                "296a272d.632de8"
+            ],
+            [
+                "db393ca8.33e82"
+            ]
+        ]
+    },
+    {
+        "id": "b05ab7bb.8cb08",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "Switch shield RPi",
+        "info": "",
+        "x": 380,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "1dc7c31a.3a70b5",
+        "type": "udp out",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "addr": "128.39.112.177",
+        "iface": "",
+        "port": "9051",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 310,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "af1789f2.753208",
+        "type": "rpi-gpio out",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "pin": "11",
+        "set": "",
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "x": 760,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "92a1ef5a.146c2",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "Led System on",
+        "info": "",
+        "x": 760,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "7f28c998.d98868",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "Taking picture",
+        "info": "",
+        "x": 1210,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "a7c5bb63.15425",
+        "type": "rpi-gpio out",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "pin": "15",
+        "set": "",
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "x": 1440,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "27c034a0.c8ab44",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "Sound the Alarm!",
+        "info": "",
+        "x": 1440,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "8e910f0d.4ae45",
+        "type": "Generic BLE in",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "genericBle": "67eb24ff.e52814",
+        "useString": true,
+        "notification": true,
+        "x": 550,
+        "y": 3800,
+        "wires": [
+            [
+                "1bea8b4f.b020ad",
+                "4481109b.b64b4"
+            ]
+        ]
+    },
+    {
+        "id": "1bea8b4f.b020ad",
+        "type": "debug",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 730,
+        "y": 3800,
+        "wires": []
+    },
+    {
+        "id": "4481109b.b64b4",
+        "type": "rpi-gpio out",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "pin": "31",
+        "set": "",
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "x": 720,
+        "y": 3840,
+        "wires": []
+    },
+    {
+        "id": "30268e31.28d7ca",
+        "type": "rpi-gpio in",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "pin": "15",
+        "intype": "in",
+        "debounce": "25",
+        "read": true,
+        "x": 130,
+        "y": 640,
+        "wires": [
+            [
+                "1dc7c31a.3a70b5"
+            ]
+        ]
+    },
+    {
+        "id": "52281b7b.417eac",
+        "type": "rpi-gpio in",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "pin": "11",
+        "intype": "in",
+        "debounce": "25",
+        "read": true,
+        "x": 130,
+        "y": 520,
+        "wires": [
+            [
+                "1dc7c31a.3a70b5"
+            ]
+        ]
+    },
+    {
+        "id": "4812f63d.ec5fd8",
+        "type": "rpi-gpio in",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "pin": "13",
+        "intype": "in",
+        "debounce": "25",
+        "read": true,
+        "x": 130,
+        "y": 580,
+        "wires": [
+            [
+                "1dc7c31a.3a70b5"
+            ]
+        ]
+    },
+    {
+        "id": "eef885bd.a53768",
+        "type": "inject",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 400,
+        "y": 3800,
+        "wires": [
+            [
+                "8e910f0d.4ae45"
+            ]
+        ]
+    },
+    {
+        "id": "b5ff5c04.8c899",
+        "type": "exec",
+        "z": "8d0c6ad7.809718",
+        "command": "./ble.sh",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": true,
+        "name": "",
+        "x": 660,
+        "y": 3640,
+        "wires": [
+            [
+                "701124e7.c0c49c"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "701124e7.c0c49c",
+        "type": "debug",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 950,
+        "y": 3620,
+        "wires": []
+    },
+    {
+        "id": "827c8a2a.440a68",
+        "type": "inject",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 450,
+        "y": 3640,
+        "wires": [
+            [
+                "b5ff5c04.8c899"
+            ]
+        ]
+    },
+    {
+        "id": "2a2a20d5.dace6",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "CMD string",
+        "info": "",
+        "x": 720,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "337bb0f3.067ef8",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "final commands",
+        "info": "",
+        "x": 1320,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "e5226910.505648",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "Sender string seriellt til Nucleo",
+        "info": "",
+        "x": 1390,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "25665991.96038e",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "Seriellt tilbake, så til UDP C#",
+        "info": "",
+        "x": 1320,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "aa752726.6db2b8",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "check-on function",
+        "info": "",
+        "x": 1410,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "30ac65f6.0599d2",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "starter detectBlob program",
+        "info": "",
+        "x": 1170,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "2301d517.a2f12a",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "starter FlaskWebServer",
+        "info": "",
+        "x": 1160,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "d8b0350c.78ac2",
+        "type": "comment",
+        "z": "8d0c6ad7.809718",
+        "name": "Sends state of pins to C#",
+        "info": "",
+        "x": 310,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "b28b5e94.427218",
+        "type": "debug",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1290,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "688935fa.d61cb4",
+        "type": "rpi-gpio in",
+        "z": "8d0c6ad7.809718",
+        "name": "",
+        "pin": "40",
+        "intype": "tri",
+        "debounce": "25",
+        "read": false,
+        "x": 130,
+        "y": 460,
+        "wires": [
+            [
+                "42e5ea5c.9799e4"
+            ]
+        ]
+    },
+    {
+        "id": "732a9e5a.5d74b",
+        "type": "serial-port",
+        "z": "",
+        "serialport": "/dev/ttyACM0",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": false,
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "67eb24ff.e52814",
+        "type": "Generic BLE",
+        "z": "",
+        "localName": "DATHOR",
+        "address": "d1:1e:c4:21:bd:72",
+        "uuid": "0000a000-0000-1000-8000-00805f9b34fb",
+        "muteNotifyEvents": false,
+        "operationTimeout": "",
+        "characteristics": []
+    }
+]

@@ -1,2 +1,2 @@
-# AlarmProsjekt
-Prosjekt for EN-SoC fag på USN
+# AlarmProsjekt_Daniel-Thorkild
+Her er alle filene til prosjektet
